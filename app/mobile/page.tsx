@@ -347,14 +347,11 @@ export default function MobilePage() {
             </p>
             <Link 
               href="/services"
-              className="animate-on-scroll delay-3"
+              className="animate-on-scroll delay-3 inline-block underline underline-offset-4"
               style={{ 
                 fontSize: '13px', 
                 color: '#c9a84c', 
                 marginTop: '16px', 
-                display: 'inline-block',
-                textDecoration: 'underline',
-                textDecorationOffset: '4px',
                 fontFamily: 'Inter, sans-serif'
               }}
             >
