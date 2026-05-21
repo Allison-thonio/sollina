@@ -455,13 +455,11 @@ export default function MobilePage() {
               </p>
               <Link 
                 href="/portfolio"
+                className="inline-block underline underline-offset-4"
                 style={{ 
                   fontSize: '13px', 
                   color: '#c9a84c', 
                   marginTop: '12px', 
-                  display: 'inline-block',
-                  textDecoration: 'underline',
-                  textDecorationOffset: '4px',
                   fontFamily: 'Inter, sans-serif'
                 }}
               >
@@ -489,13 +487,11 @@ export default function MobilePage() {
               </p>
               <Link 
                 href="/services"
+                className="inline-block underline underline-offset-4"
                 style={{ 
                   fontSize: '13px', 
                   color: '#c9a84c', 
                   marginTop: '12px', 
-                  display: 'inline-block',
-                  textDecoration: 'underline',
-                  textDecorationOffset: '4px',
                   fontFamily: 'Inter, sans-serif'
                 }}
               >
