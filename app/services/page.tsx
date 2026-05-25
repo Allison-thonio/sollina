@@ -3,7 +3,8 @@
 // the `services` array with a Firestore fetch from the `services` collection.
 'use client'
 import { useEffect, useState } from 'react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { motion } from 'framer-motion'
+import { fadeUp } from '@/lib/motionVariants'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
@@ -33,7 +34,6 @@ const SEED_SERVICES = [
 ]
 
 export default function ServicesPage() {
-  useScrollAnimation()
   const [services] = useState(SEED_SERVICES)
   // TODO (Firebase): replace useState above with a useEffect Firestore fetch
 
@@ -43,13 +43,13 @@ export default function ServicesPage() {
       <main style={{ paddingTop: '68px' }}>
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-primary)' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <span className="section-label animate-on-scroll">The Menu</span>
-            <h1 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '4rem' }}>Services & Pricing</h1>
+            <motion.span className="section-label" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>The Menu</motion.span>
+            <motion.h1 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '4rem' }}>Services & Pricing</motion.h1>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {services.map((s, i) => (
-                <div
+                <motion.div
                   key={s.id}
-                  className={`animate-on-scroll delay-${i + 1}`}
+                  variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1}
                   style={{ border: '1px solid var(--border-subtle)', padding: '2.5rem', background: 'var(--bg-card)', transition: 'border-color 0.3s ease' }}
                   onMouseOver={e => (e.currentTarget.style.borderColor = 'var(--border-accent)')}
                   onMouseOut={e => (e.currentTarget.style.borderColor = 'var(--border-subtle)')}
@@ -68,7 +68,7 @@ export default function ServicesPage() {
                     ))}
                   </div>
                   <Link href="/contact" className="btn-ghost">Inquire Now</Link>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

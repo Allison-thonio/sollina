@@ -42,7 +42,12 @@ export default function Footer() {
               ['Facebook', '#'],
               ['Admin Console', '/admin'],
             ].map(([label, href]) => (
-              <a key={label} href={href} style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '0.75rem', transition: 'color 0.3s ease' }}
+              <a 
+                key={label} 
+                href={href} 
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '0.75rem', transition: 'color 0.3s ease' }}
                 onMouseOver={e => (e.currentTarget.style.color = 'var(--accent-gold)')}
                 onMouseOut={e => (e.currentTarget.style.color = 'var(--text-muted)')}
               >{label}</a>

@@ -1,6 +1,7 @@
 // FIX 8 — empty state fallback to placeholder images when Firestore is empty
 'use client'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { motion } from 'framer-motion'
+import { fadeUp } from '@/lib/motionVariants'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
@@ -16,10 +17,10 @@ const PLACEHOLDER_IMAGES = [
 ]
 
 export default function PortfolioPage() {
-  useScrollAnimation()
   // TODO (Firebase): fetch from Firestore `portfolio` collection.
   // If result is empty or loading, show PLACEHOLDER_IMAGES.
   const [items] = useState(PLACEHOLDER_IMAGES)
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
 
   return (
     <>
@@ -27,14 +28,15 @@ export default function PortfolioPage() {
       <main style={{ paddingTop: '68px' }}>
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-primary)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <span className="section-label animate-on-scroll">The Work</span>
-            <h1 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '3rem' }}>Our Portfolio</h1>
+            <motion.span className="section-label" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>The Work</motion.span>
+            <motion.h1 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '3rem' }}>Our Portfolio</motion.h1>
             <div style={{ columns: '3 280px', gap: '1rem' }}>
               {items.map((item, i) => (
-                <div
+                <motion.div
                   key={item.id}
-                  className={`animate-on-scroll delay-${(i % 4) + 1}`}
+                  variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i % 4 + 1) * 0.1}
                   style={{ position: 'relative', breakInside: 'avoid', marginBottom: '1rem', overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => setLightboxImage(item.imageUrl)}
                 >
                   <div style={{ position: 'relative', paddingBottom: i % 3 === 0 ? '120%' : '75%' }}>
                     <Image src={item.imageUrl} alt={item.title} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
@@ -55,13 +57,56 @@ export default function PortfolioPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
       </main>
       <Footer />
+      
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div 
+          style={{ 
+            position: 'fixed', 
+            inset: 0, 
+            background: 'rgba(0,0,0,0.95)', 
+            zIndex: 9999, 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            padding: '2rem'
+          }}
+          onClick={() => setLightboxImage(null)}
+        >
+          <div style={{ position: 'relative', maxWidth: '1200px', maxHeight: '90vh', width: '100%' }}>
+            <Image 
+              src={lightboxImage} 
+              alt="Lightbox" 
+              fill 
+              style={{ objectFit: 'contain' }}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              style={{
+                position: 'absolute',
+                top: '-3rem',
+                right: 0,
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-primary)',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                padding: '0.5rem'
+              }}
+              onClick={() => setLightboxImage(null)}
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }

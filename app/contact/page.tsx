@@ -1,7 +1,8 @@
 // FIX 9 — form POSTs to /api/booking (Firebase backend), NOT a fake success state
 'use client'
 import { useState } from 'react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { motion } from 'framer-motion'
+import { fadeUp } from '@/lib/motionVariants'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -12,15 +13,13 @@ const inputStyle = {
   border: '1px solid var(--border-subtle)',
   color: 'var(--text-primary)',
   fontFamily: 'DM Sans, sans-serif',
-  fontSize: '0.875rem',
+  fontSize: '16px',
   fontWeight: 300,
   outline: 'none',
   transition: 'border-color 0.3s ease',
 }
 
 export default function ContactPage() {
-  useScrollAnimation()
-
   const [form, setForm] = useState({
     fullName: '', email: '', phone: '',
     service: '', preferredDate: '', sessionNotes: '',
@@ -57,10 +56,10 @@ export default function ContactPage() {
       <Navbar />
       <main style={{ paddingTop: '68px' }}>
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-primary)', minHeight: '100vh' }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '5rem', alignItems: 'start' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '5rem', alignItems: 'start' }} className="contact-grid">
 
             {/* Left — contact info */}
-            <div className="animate-on-scroll">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>
               <span className="section-label">Begin Your Session</span>
               <h1 className="section-heading" style={{ marginBottom: '2.5rem' }}>Book a Session</h1>
               {[
@@ -74,10 +73,10 @@ export default function ContactPage() {
                   <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'pre-line', lineHeight: 1.7 }}>{item.value}</p>
                 </div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Right — form */}
-            <div className="animate-on-scroll delay-2">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.2}>
               {status === 'success' ? (
                 <div style={{ border: '1px solid var(--border-accent)', padding: '3rem', textAlign: 'center' }}>
                   <span style={{ display: 'block', fontSize: '2rem', marginBottom: '1rem' }}>✦</span>
@@ -175,9 +174,17 @@ export default function ContactPage() {
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </section>
+        <style>{`
+          @media (max-width: 768px) {
+            .contact-grid {
+              grid-template-columns: 1fr !important;
+              gap: 3rem !important;
+            }
+          }
+        `}</style>
       </main>
       <Footer />
     </>

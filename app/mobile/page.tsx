@@ -95,7 +95,9 @@ export default function MobilePage() {
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: 0
+            padding: 0,
+            minHeight: '44px',
+            minWidth: '44px'
           }}
         >
           <span style={{ width: '20px', height: '2px', backgroundColor: '#c9a84c' }} />
@@ -135,8 +137,8 @@ export default function MobilePage() {
             position: 'absolute',
             top: 0,
             right: isDrawerOpen ? '0' : '-320px',
-            width: '85vw',
-            maxWidth: '320px',
+            width: 'min(85vw, 300px)',
+            maxWidth: '300px',
             height: '100%',
             backgroundColor: '#0f0f0f',
             borderLeft: '1px solid rgba(201,168,76,0.2)',
@@ -183,7 +185,10 @@ export default function MobilePage() {
                     fontSize: '18px',
                     color: '#f5f5f0',
                     textDecoration: 'none',
-                    transition: 'color 0.2s ease'
+                    transition: 'color 0.2s ease',
+                    minHeight: '44px',
+                    display: 'flex',
+                    alignItems: 'center'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.color = '#c9a84c'}
                   onMouseLeave={(e) => e.currentTarget.style.color = '#f5f5f0'}
@@ -194,26 +199,40 @@ export default function MobilePage() {
             </nav>
 
             <div style={{ marginTop: 'auto' }}>
-              <button style={{
-                width: '100%',
-                height: '48px',
-                backgroundColor: '#c9a84c',
-                color: '#0a0a0a',
-                border: 'none',
-                fontSize: '12px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                cursor: 'pointer',
-                fontFamily: 'Inter, sans-serif',
-                marginBottom: '24px'
-              }}>
+              <Link 
+                href="/contact"
+                style={{
+                  width: '100%',
+                  height: '48px',
+                  backgroundColor: '#c9a84c',
+                  color: '#0a0a0a',
+                  border: 'none',
+                  fontSize: '12px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.15em',
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textDecoration: 'none',
+                  minHeight: '44px'
+                }}
+              >
                 Book a Session
-              </button>
+              </Link>
               <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
                 {['Instagram', 'TikTok', 'Facebook'].map((social) => (
-                  <span key={social} style={{ color: '#c9a84c', fontSize: '20px', cursor: 'pointer' }}>
+                  <a 
+                    key={social} 
+                    href="#" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ color: '#c9a84c', fontSize: '20px', cursor: 'pointer', textDecoration: 'none', minHeight: '44px', minWidth: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
                     {social[0]}
-                  </span>
+                  </a>
                 ))}
               </div>
             </div>
@@ -221,7 +240,7 @@ export default function MobilePage() {
         </div>
 
         {/* SECTION 1 — HERO */}
-        <section style={{ position: 'relative', height: '100svh', minHeight: '600px', overflow: 'hidden' }}>
+        <section style={{ position: 'relative', height: '100svh', minHeight: '100svh', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Image
             src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop"
             alt="Solalina Studios"
@@ -237,7 +256,7 @@ export default function MobilePage() {
             </span>
             <h1 className="animate-on-scroll delay-1" style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '36px',
+              fontSize: 'clamp(28px, 8vw, 42px)',
               color: '#f5f5f0',
               lineHeight: 1.15,
               marginTop: '12px',
@@ -248,42 +267,44 @@ export default function MobilePage() {
             </h1>
             <p className="animate-on-scroll delay-2" style={{ 
               fontFamily: 'Inter, sans-serif', 
-              fontSize: '14px', 
+              fontSize: 'clamp(13px, 4vw, 15px)', 
               color: '#888888', 
               lineHeight: 1.6, 
               marginTop: '16px',
-              maxWidth: '320px'
+              maxWidth: 'clamp(280px, 80vw, 340px)'
             }}>
               A world-class creative ecosystem dedicated to Photography, Videography, and Content Production in the heart of Yenagoa, Nigeria.
             </p>
-            <div className="animate-on-scroll delay-3" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '24px' }}>
+            <div className="animate-on-scroll delay-3" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'clamp(16px, 4vw, 24px)' }}>
               <button style={{
                 width: '100%',
-                height: '48px',
+                height: 'clamp(44px, 12vw, 50px)',
                 backgroundColor: '#c9a84c',
                 color: '#0a0a0a',
                 border: 'none',
-                fontSize: '12px',
+                fontSize: 'clamp(11px, 3vw, 13px)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.15em',
                 cursor: 'pointer',
                 fontFamily: 'Inter, sans-serif',
-                borderRadius: 0
+                borderRadius: 0,
+                minHeight: '44px'
               }}>
                 Explore the Hub
               </button>
               <button style={{
                 width: '100%',
-                height: '48px',
+                height: 'clamp(44px, 12vw, 50px)',
                 backgroundColor: 'transparent',
                 color: '#c9a84c',
                 border: '1px solid #c9a84c',
-                fontSize: '12px',
+                fontSize: 'clamp(11px, 3vw, 13px)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.15em',
                 cursor: 'pointer',
                 fontFamily: 'Inter, sans-serif',
-                borderRadius: 0
+                borderRadius: 0,
+                minHeight: '44px'
               }}>
                 Book a Session
               </button>
@@ -300,7 +321,8 @@ export default function MobilePage() {
           <div style={{ 
             display: 'flex', 
             whiteSpace: 'nowrap',
-            animation: 'marquee 30s linear infinite'
+            animation: 'marquee 30s linear infinite',
+            willChange: 'transform'
           }}>
             <span style={{ fontSize: '13px', color: '#c9a84c', textTransform: 'uppercase', letterSpacing: '0.1em', paddingRight: '60px' }}>
               Premium Lighting Equipment · Fully Soundproofed Studio Room · Private Dressing Rooms · High-Speed Fiber Internet · Trusted by brands and creators across Bayelsa State · Premium Lighting Equipment · Fully Soundproofed Studio Room · Private Dressing Rooms · High-Speed Fiber Internet · Trusted by brands and creators across Bayelsa State ·
@@ -394,7 +416,7 @@ export default function MobilePage() {
             ))}
           </div>
 
-          <div className="animate-on-scroll delay-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '40px' }}>
+          <div className="animate-on-scroll delay-4 grid-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px, 3vw, 16px)', marginTop: 'clamp(32px, 8vw, 40px)' }}>
             {[
               { title: 'SET DESIGN', desc: 'Modular sets that evolve with your vision' },
               { title: 'GEAR COLLECTION', desc: 'Industry-standard lighting and camera support' },
@@ -419,14 +441,14 @@ export default function MobilePage() {
         </section>
 
         {/* SECTION 5 — VISUAL ALCHEMY */}
-        <section style={{ padding: '16px 0', paddingTop: '56px', paddingBottom: '56px', backgroundColor: '#0a0a0a' }}>
-          <div style={{ padding: '0 16px' }}>
+        <section style={{ padding: 'clamp(12px, 3vw, 16px) 0', paddingTop: 'clamp(48px, 12vw, 56px)', paddingBottom: 'clamp(48px, 12vw, 56px)', backgroundColor: '#0a0a0a' }}>
+          <div style={{ padding: '0 clamp(12px, 3vw, 16px)' }}>
             <span className="animate-on-scroll" style={{ fontSize: '10px', color: '#c9a84c', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 500 }}>
               The Work
             </span>
             <h2 className="animate-on-scroll delay-1" style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '28px',
+              fontSize: 'clamp(24px, 6vw, 28px)',
               color: '#f5f5f0',
               marginTop: '8px',
               fontWeight: 400,
@@ -437,7 +459,7 @@ export default function MobilePage() {
           </div>
 
           {/* Card 1 */}
-          <div className="animate-on-scroll delay-2" style={{ marginTop: '32px' }}>
+          <div className="animate-on-scroll delay-2" style={{ marginTop: 'clamp(24px, 6vw, 32px)' }}>
             <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
               <Image
                 src="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?q=80&w=2069&auto=format&fit=crop"
@@ -469,7 +491,7 @@ export default function MobilePage() {
           </div>
 
           {/* Card 2 */}
-          <div className="animate-on-scroll delay-3" style={{ marginTop: '32px' }}>
+          <div className="animate-on-scroll delay-3" style={{ marginTop: 'clamp(24px, 6vw, 32px)' }}>
             <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
               <Image
                 src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2078&auto=format&fit=crop"
@@ -478,7 +500,7 @@ export default function MobilePage() {
                 style={{ objectFit: 'cover', transition: 'transform 0.2s ease' }}
               />
             </div>
-            <div style={{ padding: '0 16px', paddingTop: '16px' }}>
+            <div style={{ padding: '0 clamp(12px, 3vw, 16px)', paddingTop: 'clamp(12px, 3vw, 16px)' }}>
               <span style={{ fontSize: '10px', color: '#c9a84c', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 500 }}>
                 EDITORIAL SETS
               </span>
@@ -502,7 +524,7 @@ export default function MobilePage() {
         </section>
 
         {/* SECTION 6 — STUDIO PERKS */}
-        <section style={{ backgroundColor: '#0a0a0a', padding: '24px', paddingTop: '64px', paddingBottom: '64px' }}>
+        <section style={{ backgroundColor: '#0a0a0a', padding: 'clamp(16px, 4vw, 24px)', paddingTop: 'clamp(56px, 14vw, 64px)', paddingBottom: 'clamp(56px, 14vw, 64px)' }}>
           <span className="animate-on-scroll" style={{ fontSize: '10px', color: '#c9a84c', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 500 }}>
             Studio Perks
           </span>
@@ -517,16 +539,16 @@ export default function MobilePage() {
             More Than<br />Just a Space
           </h2>
 
-          <div className="animate-on-scroll delay-2" style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: '32px', borderTop: '1px solid rgba(201,168,76,0.2)' }}>
+          <div className="animate-on-scroll delay-2" style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: 'clamp(24px, 6vw, 32px)', borderTop: '1px solid rgba(201,168,76,0.2)' }}>
             {[
               { num: '01', title: 'STUDIO ROOM', desc: 'Professionally lit for any shoot format' },
               { num: '02', title: 'DRESSING ROOMS', desc: 'Private styling and wardrobe spaces' },
               { num: '03', title: 'HIGH-SPEED FIBER', desc: 'Instant uploads and file transfers' },
               { num: '04', title: 'PODCAST SUITE', desc: 'Soundproofed, mic\'d for clear audio' }
             ].map((item) => (
-              <div key={item.num} style={{ 
+              <div key={item.num} className="perk-row" style={{ 
                 borderBottom: '1px solid rgba(201,168,76,0.2)', 
-                padding: '20px 0', 
+                padding: 'clamp(16px, 4vw, 20px) 0', 
                 display: 'flex', 
                 justifyContent: 'space-between',
                 alignItems: 'center'
@@ -546,13 +568,13 @@ export default function MobilePage() {
         </section>
 
         {/* SECTION 7 — CTA / BOOKING */}
-        <section style={{ backgroundColor: '#0d0d0d', padding: '24px', paddingTop: '80px', paddingBottom: '80px', textAlign: 'center' }}>
+        <section style={{ backgroundColor: '#0d0d0d', padding: 'clamp(16px, 4vw, 24px)', paddingTop: 'clamp(64px, 16vw, 80px)', paddingBottom: 'clamp(64px, 16vw, 80px)', textAlign: 'center' }}>
           <span className="animate-on-scroll" style={{ fontSize: '10px', color: '#c9a84c', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 500 }}>
             Begin Your Session
           </span>
           <h2 className="animate-on-scroll delay-1" style={{
             fontFamily: 'Playfair Display, serif',
-            fontSize: '30px',
+            fontSize: 'clamp(26px, 7vw, 30px)',
             color: '#f5f5f0',
             marginTop: '12px',
             fontWeight: 400,
@@ -562,7 +584,7 @@ export default function MobilePage() {
           </h2>
           <p className="animate-on-scroll delay-2" style={{ 
             fontFamily: 'Inter, sans-serif', 
-            fontSize: '14px', 
+            fontSize: 'clamp(13px, 4vw, 15px)', 
             color: '#888888', 
             lineHeight: 1.6, 
             marginTop: '16px'
@@ -570,34 +592,36 @@ export default function MobilePage() {
             Our team is prepared to craft a bespoke studio experience tailored to your every creative need.
           </p>
 
-          <div className="animate-on-scroll delay-3" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '32px' }}>
+          <div className="animate-on-scroll delay-3" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'clamp(24px, 6vw, 32px)' }}>
             <button style={{
               width: '100%',
-              height: '50px',
+              height: 'clamp(44px, 12vw, 50px)',
               backgroundColor: '#c9a84c',
               color: '#0a0a0a',
               border: 'none',
-              fontSize: '12px',
+              fontSize: 'clamp(11px, 3vw, 13px)',
               textTransform: 'uppercase',
               letterSpacing: '0.15em',
               cursor: 'pointer',
               fontFamily: 'Inter, sans-serif',
-              borderRadius: 0
+              borderRadius: 0,
+              minHeight: '44px'
             }}>
               Reserve Now
             </button>
             <button style={{
               width: '100%',
-              height: '50px',
+              height: 'clamp(44px, 12vw, 50px)',
               backgroundColor: 'transparent',
               color: '#c9a84c',
               border: '1px solid #c9a84c',
-              fontSize: '12px',
+              fontSize: 'clamp(11px, 3vw, 13px)',
               textTransform: 'uppercase',
               letterSpacing: '0.15em',
               cursor: 'pointer',
               fontFamily: 'Inter, sans-serif',
-              borderRadius: 0
+              borderRadius: 0,
+              minHeight: '44px'
             }}>
               Contact Studio Team
             </button>
@@ -687,6 +711,24 @@ export default function MobilePage() {
         .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
         .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
         .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+
+        @media (max-width: 360px) {
+          .grid-responsive {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .perk-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+          }
+          .perk-row span:last-child {
+            max-width: 100%;
+            text-align: left;
+          }
+        }
       `}</style>
     </div>
   )

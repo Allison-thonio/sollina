@@ -1,6 +1,7 @@
 'use client'
-import { useEffect } from 'react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { fadeUp, scaleIn } from '@/lib/motionVariants'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollChevron from '@/components/ScrollChevron'
@@ -8,7 +9,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function HomePage() {
-  useScrollAnimation()   // wires up all .animate-on-scroll elements
+  const heroSectionRef = useRef<HTMLElement>(null)
+  const [heroOffset, setHeroOffset] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHeroOffset(window.scrollY * 0.4)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
@@ -16,32 +27,36 @@ export default function HomePage() {
       <main>
 
         {/* ── SECTION 1: HERO ── */}
-        <section style={{ position: 'relative', height: '100vh', minHeight: '600px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-          <Image
-            src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop"
-            alt="Solalina Studios"
-            fill
-            priority
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
+        <section ref={heroSectionRef} style={{ position: 'relative', height: '100vh', minHeight: '600px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, transform: `translateY(${heroOffset}px)`, top: '-20%', height: '120%' }}>
+            <Image
+              src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop"
+              alt="Solalina Studios"
+              fill
+              priority
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
+          </div>
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.88) 100%)' }} />
 
           <div style={{ position: 'relative', zIndex: 2, padding: '0 2rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-            <span className="section-label-gold animate-on-scroll">Warri's Premier Hub for Visual Excellence</span>
-            <h1 style={{
+            <motion.span className="section-label-gold" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>
+              Warri's Premier Hub for Visual Excellence
+            </motion.span>
+            <motion.h1 style={{
               fontFamily: 'Cormorant Garamond, serif',
               fontWeight: 300,
               fontSize: 'clamp(3.5rem, 8vw, 7rem)',
               lineHeight: 1.0,
               color: 'var(--text-primary)',
               marginBottom: '1.5rem',
-            }} className="animate-on-scroll delay-1">
+            }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1}>
               Where Visions<br />Become Masterpieces
-            </h1>
-            <p style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '1rem', color: 'var(--text-muted)', maxWidth: '460px', lineHeight: 1.7, marginBottom: '2.5rem' }} className="animate-on-scroll delay-2">
+            </motion.h1>
+            <motion.p style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '1rem', color: 'var(--text-muted)', maxWidth: '460px', lineHeight: 1.7, marginBottom: '2.5rem' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.2}>
               A world-class creative ecosystem dedicated to Photography, Videography, and Content Production in the heart of Warri, Nigeria.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="animate-on-scroll delay-3">
+            </motion.p>
+            <motion.div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.3}>
               {/* FIX 6 — Explore the Hub scrolls to #services anchor */}
               <button
                 className="btn-primary"
@@ -50,7 +65,7 @@ export default function HomePage() {
                 Explore the Hub
               </button>
               <Link href="/contact" className="btn-ghost">Book a Session</Link>
-            </div>
+            </motion.div>
           </div>
 
           <ScrollChevron />
@@ -60,34 +75,34 @@ export default function HomePage() {
         {/* FIX 6 — id="services" anchor so Explore the Hub scroll works */}
         <section id="services" style={{ background: 'var(--bg-secondary)', padding: '5rem 2rem' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <span className="section-label animate-on-scroll">Amenities</span>
-            <h2 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '3rem' }}>More Than Just a Space.</h2>
+            <motion.span className="section-label" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>Amenities</motion.span>
+            <motion.h2 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '3rem' }}>More Than Just a Space.</motion.h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
               {['Premium Lighting Equipment', 'Fully Soundproofed Studio Room', 'Private Dressing Rooms', 'High-Speed Fiber Internet'].map((item, i) => (
-                <div key={item} className={`animate-on-scroll delay-${i + 1}`} style={{ border: '1px solid var(--border-subtle)', padding: '1.25rem 1.5rem', background: 'var(--bg-card)' }}>
+                <motion.div key={item} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1} style={{ border: '1px solid var(--border-subtle)', padding: '1.25rem 1.5rem', background: 'var(--bg-card)' }}>
                   <span style={{ display: 'block', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-gold)', marginBottom: '0.75rem' }} />
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 400 }}>{item}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-            <p style={{ fontStyle: 'italic', color: 'var(--accent-gold)', opacity: 0.8, fontSize: '0.85rem' }} className="animate-on-scroll">
+            <motion.p style={{ fontStyle: 'italic', color: 'var(--accent-gold)', opacity: 0.8, fontSize: '0.85rem' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>
               "Trusted by brands and creators across the Niger Delta."
-            </p>
+            </motion.p>
           </div>
         </section>
 
         {/* ── SECTION 3: CREATIVE SPACES SPLIT ── */}
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-primary)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
-            <div style={{ position: 'relative', height: '520px', overflow: 'hidden' }} className="animate-on-scroll">
+            <motion.div style={{ position: 'relative', height: '520px', overflow: 'hidden' }} variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
               <Image
                 src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=2070&auto=format&fit=crop"
                 alt="Creative Spaces"
                 fill
                 style={{ objectFit: 'cover' }}
               />
-            </div>
-            <div className="animate-on-scroll delay-2">
+            </motion.div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.2}>
               <span className="section-label-gold">Creative Spaces</span>
               <h2 className="section-heading" style={{ marginBottom: '1.5rem' }}>Production,<br />Refined</h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '0.9rem' }}>
@@ -97,7 +112,7 @@ export default function HomePage() {
                 From high-end fashion shoots to intimate podcast recordings, every setup tells a story of creative excellence.
               </p>
               <Link href="/services" className="btn-primary">Explore Our Spaces</Link>
-            </div>
+            </motion.div>
           </div>
           <style>{`
             @media (max-width: 768px) {
@@ -111,7 +126,7 @@ export default function HomePage() {
         {/* ── SECTION 4: THE CREATIVE EDGE ── */}
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-secondary)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '5rem' }}>
-            <div className="animate-on-scroll">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>
               <span className="section-label">The Creative Edge</span>
               <h2 className="section-heading" style={{ marginBottom: '1.5rem' }}>Modular Spaces</h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.9rem', marginBottom: '2rem' }}>
@@ -123,7 +138,7 @@ export default function HomePage() {
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item}</span>
                 </div>
               ))}
-            </div>
+            </motion.div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border-subtle)' }}>
               {[
                 { title: 'SET DESIGN', desc: 'Modular sets that evolve with your vision, from minimalist chic to high-end editorial.' },
@@ -131,16 +146,16 @@ export default function HomePage() {
                 { title: 'CREATIVE HUB', desc: 'A collaborative environment designed for photographers, videographers, and creators.' },
                 { title: 'POST-PRODUCTION', desc: 'High-speed editing suites and Fiber internet for seamless content turnaround.' },
               ].map((card, i) => (
-                <div
+                <motion.div
                   key={card.title}
-                  className={`animate-on-scroll delay-${i + 1}`}
+                  variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1}
                   style={{ background: 'var(--bg-card)', padding: '2rem', transition: 'border-color 0.3s ease', border: '1px solid transparent', cursor: 'default' }}
                   onMouseOver={e => (e.currentTarget.style.borderColor = 'var(--border-accent)')}
                   onMouseOut={e => (e.currentTarget.style.borderColor = 'transparent')}
                 >
                   <span className="section-label" style={{ color: 'var(--accent-gold)', marginBottom: '1rem' }}>{card.title}</span>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>{card.desc}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -149,8 +164,8 @@ export default function HomePage() {
         {/* ── SECTION 5: VISUAL ALCHEMY ── */}
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-primary)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <span className="section-label animate-on-scroll">The Work</span>
-            <h2 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '3rem' }}>Visual Alchemy</h2>
+            <motion.span className="section-label" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>The Work</motion.span>
+            <motion.h2 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '3rem' }}>Visual Alchemy</motion.h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
               {[
                 {
@@ -168,20 +183,20 @@ export default function HomePage() {
                   cta: 'View Set Details',
                 },
               ].map((card, i) => (
-                <div key={card.title} className={`animate-on-scroll delay-${i + 1}`} style={{ position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'relative', height: '420px' }}>
+                <motion.div key={card.title} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <motion.div style={{ position: 'relative', height: '420px' }} variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
                     <Image src={card.img} alt={card.title} fill style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }}
                       onMouseOver={e => ((e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)')}
                       onMouseOut={e => ((e.currentTarget as HTMLImageElement).style.transform = 'scale(1)')}
                     />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%)' }} />
-                  </div>
+                  </motion.div>
                   <div style={{ padding: '1.5rem 0' }}>
                     <span className="section-label" style={{ color: 'var(--accent-gold)' }}>{card.title}</span>
                     <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.25rem' }}>{card.desc}</p>
                     <Link href={card.link} className="btn-ghost" style={{ fontSize: '0.7rem' }}>{card.cta} →</Link>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -190,8 +205,8 @@ export default function HomePage() {
         {/* ── SECTION 6: STUDIO PERKS ── */}
         <section style={{ padding: '7rem 2rem', background: 'var(--bg-secondary)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <span className="section-label animate-on-scroll">Studio Perks</span>
-            <h2 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '3rem' }}>More Than Just a Space</h2>
+            <motion.span className="section-label" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0}>Studio Perks</motion.span>
+            <motion.h2 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '3rem' }}>More Than Just a Space</motion.h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem' }}>
               {[
                 { num: '01', title: 'STUDIO ROOM', desc: 'Professionally lit and equipped for any shoot format.' },
@@ -199,11 +214,11 @@ export default function HomePage() {
                 { num: '03', title: 'HIGH-SPEED FIBER', desc: 'Fiber-optic internet for instant uploads and transfers.' },
                 { num: '04', title: 'PODCAST SUITE', desc: 'Soundproofed and mic\'d for crystal-clear audio recording.' },
               ].map((item, i) => (
-                <div key={item.num} className={`animate-on-scroll delay-${i + 1}`} style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.5rem' }}>
+                <motion.div key={item.num} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1} style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.5rem' }}>
                   <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '3rem', fontWeight: 300, color: 'var(--accent-gold)', opacity: 0.6, display: 'block', marginBottom: '0.5rem' }}>{item.num}</span>
                   <span className="section-label" style={{ color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{item.title}</span>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>{item.desc}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -213,19 +228,19 @@ export default function HomePage() {
         {/* FIX 4 — noise-overlay class applies the CSS noise texture */}
         <section className="noise-overlay" style={{ padding: '8rem 2rem', background: 'var(--bg-primary)', textAlign: 'center' }}>
           <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-            <span className="section-label-gold animate-on-scroll" style={{ textAlign: 'center', display: 'block' }}>Begin Your Session</span>
-            <h2 className="section-heading animate-on-scroll delay-1" style={{ marginBottom: '1.25rem' }}>Ready to Capture Your Story?</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '2.5rem' }} className="animate-on-scroll delay-2">
+            <motion.span className="section-label-gold" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0} style={{ textAlign: 'center', display: 'block' }}>Begin Your Session</motion.span>
+            <motion.h2 className="section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.1} style={{ marginBottom: '1.25rem' }}>Ready to Capture Your Story?</motion.h2>
+            <motion.p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '2.5rem' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.2}>
               Our team is prepared to craft a bespoke studio experience tailored to your every creative need.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} className="animate-on-scroll delay-3">
+            </motion.p>
+            <motion.div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.3}>
               <Link href="/contact" className="btn-primary">Reserve Now</Link>
               <Link href="/contact" className="btn-ghost">Contact Studio Team</Link>
-            </div>
-            <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }} className="animate-on-scroll delay-4">
+            </motion.div>
+            <motion.div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={0.4}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-label)' }}>+234 (0) 806 000 0000</span>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-label)' }}>bookings@solalina.com</span>
-            </div>
+            </motion.div>
           </div>
         </section>
 
