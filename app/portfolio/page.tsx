@@ -66,15 +66,16 @@ export default function PortfolioPage() {
       <Footer />
       
       {/* Lightbox */}
+      <div className="relative" style={{ minHeight: '100vh' }}>
       {lightboxImage && (
         <div 
-          style={{ 
-            position: 'fixed', 
-            inset: 0, 
-            background: 'rgba(0,0,0,0.95)', 
-            zIndex: 9999, 
-            display: 'flex', 
-            alignItems: 'center', 
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0,0,0,0.95)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             padding: '2rem'
           }}

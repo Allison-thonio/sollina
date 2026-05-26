@@ -1,3 +1,5 @@
+import nodemailer from 'nodemailer';
+
 // In-memory rate limiting store
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
 
@@ -112,17 +114,48 @@ export async function POST(request: Request) {
       )
     }
 
-    // TODO (Firebase): replace this with actual Firestore save
-    // For now, just log and return success
-    console.log('[Booking] New booking request:', {
-      fullName: trimmedFullName,
-      email: trimmedEmail,
-      phone: trimmedPhone,
-      service: trimmedService,
-      preferredDate: trimmedPreferredDate,
-      sessionNotes: trimmedSessionNotes,
-      submittedAt: new Date().toISOString(),
+    // Configure nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER || 'solalinastudiouse@gmail.com',
+        pass: process.env.EMAIL_PASS
+      }
     })
+
+    // Setup email data
+    const mailOptions = {
+      from: process.env.EMAIL_USER || 'solalinastudiouse@gmail.com',
+      to: 'allisonfezyy@gmail.com',
+      subject: `New Booking Request: ${trimmedService} for ${trimmedFullName}`,
+      text: `
+You have received a new booking request from Sollina Studios website.
+
+Details:
+- Full Name: ${trimmedFullName}
+- Email: ${trimmedEmail}
+- Phone: ${trimmedPhone}
+- Service Requested: ${trimmedService}
+- Preferred Date: ${trimmedPreferredDate}
+- Session Notes: ${trimmedSessionNotes || 'None'}
+      `,
+      html: `
+        <h2>New Booking Request</h2>
+        <p>You have received a new booking request from the Sollina Studios website.</p>
+        <table border="1" cellpadding="10" style="border-collapse: collapse;">
+          <tr><td><strong>Full Name</strong></td><td>${trimmedFullName}</td></tr>
+          <tr><td><strong>Email</strong></td><td>${trimmedEmail}</td></tr>
+          <tr><td><strong>Phone</strong></td><td>${trimmedPhone}</td></tr>
+          <tr><td><strong>Service</strong></td><td>${trimmedService}</td></tr>
+          <tr><td><strong>Preferred Date</strong></td><td>${trimmedPreferredDate}</td></tr>
+          <tr><td><strong>Session Notes</strong></td><td>${trimmedSessionNotes || 'None'}</td></tr>
+        </table>
+      `
+    }
+
+    // Send the email
+    await transporter.sendMail(mailOptions)
+    console.log('[Booking] Email sent successfully for:', trimmedFullName)
 
     return Response.json(
       { message: 'Booking request received successfully' },
