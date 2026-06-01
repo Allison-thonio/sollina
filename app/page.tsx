@@ -34,6 +34,7 @@ export default function HomePage() {
               alt="Solalina Studios"
               fill
               priority
+              sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center' }}
             />
           </div>
@@ -99,6 +100,7 @@ export default function HomePage() {
                 src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=2070&auto=format&fit=crop"
                 alt="Creative Spaces"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
               />
             </motion.div>
@@ -185,7 +187,7 @@ export default function HomePage() {
               ].map((card, i) => (
                 <motion.div key={card.title} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} custom={(i + 1) * 0.1} style={{ position: 'relative', overflow: 'hidden' }}>
                   <motion.div style={{ position: 'relative', height: '420px' }} variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
-                    <Image src={card.img} alt={card.title} fill style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }}
+                    <Image src={card.img} alt={card.title} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }}
                       onMouseOver={e => ((e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)')}
                       onMouseOut={e => ((e.currentTarget as HTMLImageElement).style.transform = 'scale(1)')}
                     />
