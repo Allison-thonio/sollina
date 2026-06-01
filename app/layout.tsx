@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import LoadingScreen from '@/components/LoadingScreen'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </head>
       <body>
-        {children}
+        <LoadingScreen>
+          {children}
+        </LoadingScreen>
       </body>
     </html>
   )
