@@ -20,11 +20,11 @@ const panelVariants: Variants = {
 export default function LoadingScreen({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [hasSeen, markSeen] = useHasSeenLoader();
+  const [hasSeen, isReady, markSeen] = useHasSeenLoader();
 
   useEffect(() => {
     setMounted(true);
-    if (!hasSeen) {
+    if (isReady && !hasSeen) {
       setShow(true);
       const timer = setTimeout(() => {
         setShow(false);
@@ -32,7 +32,8 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [hasSeen, markSeen]);
+  }, [isReady, hasSeen, markSeen]);
+
 
   if (!mounted) return <div style={{ opacity: 0 }}>{children}</div>;
 

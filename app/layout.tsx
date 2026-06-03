@@ -3,8 +3,8 @@ import LoadingScreen from '@/components/LoadingScreen'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Solalina Studios | Warri\'s Premier Content Hub',
-  description: 'Premier photography, videography, and podcast studio in Warri, Delta State. Book your session today.',
+  title: 'Solalina Studios | Bayelsa\'s Premier Content Hub',
+  description: 'Premier photography, videography, and podcast studio in Bayelsa State. Book your session today.',
   openGraph: {
     images: [
       {
