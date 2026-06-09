@@ -8,12 +8,12 @@ import Image from 'next/image'
 import { useState, useEffect, useCallback } from 'react'
 
 const PLACEHOLDER_IMAGES = [
-  { id: '1', imageUrl: 'https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?w=800', title: 'Brand Editorial', category: 'Photography' },
-  { id: '2', imageUrl: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800', title: 'Fashion Shoot', category: 'Photography' },
-  { id: '3', imageUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800', title: 'Podcast Session', category: 'Podcast' },
-  { id: '4', imageUrl: 'https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=800', title: 'Studio Session', category: 'Videography' },
-  { id: '5', imageUrl: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800', title: 'Product Shoot', category: 'Photography' },
-  { id: '6', imageUrl: 'https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?w=800', title: 'Content Creation', category: 'Videography' },
+  { id: '1', imageUrl: '/studio-4.jpg', title: 'Brand Editorial', category: 'Photography' },
+  { id: '2', imageUrl: '/studio-2.jpg', title: 'Fashion Shoot', category: 'Photography' },
+  { id: '3', imageUrl: '/studio-3.jpg', title: 'Podcast Session', category: 'Podcast' },
+  { id: '4', imageUrl: '/studio-1.jpg', title: 'Studio Session', category: 'Videography' },
+  { id: '5', imageUrl: '/studio-5.jpg', title: 'Product Shoot', category: 'Photography' },
+  { id: '6', imageUrl: '/studio-1.jpg', title: 'Content Creation', category: 'Videography' },
 ]
 
 const CATEGORIES = ['All', 'Photography', 'Videography', 'Podcast']
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
         <section style={{ position: 'relative', minHeight: '320px', display: 'flex', alignItems: 'center', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-subtle)', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0 }}>
             <Image
-              src="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?q=80&w=2069&auto=format&fit=crop"
+              src="/studio-4.jpg"
               alt="Portfolio hero"
               fill
               sizes="100vw"

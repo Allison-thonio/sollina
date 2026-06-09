@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop',
+        url: '/studio-1.jpg',
         width: 2070,
         height: 1380,
         alt: 'Solalina Studios',

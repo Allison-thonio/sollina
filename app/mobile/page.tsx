@@ -242,7 +242,7 @@ export default function MobilePage() {
         {/* SECTION 1 — HERO */}
         <section style={{ position: 'relative', height: '100svh', minHeight: '100svh', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Image
-            src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop"
+            src="/studio-1.jpg"
             alt="Solalina Studios"
             fill
             priority
@@ -273,7 +273,7 @@ export default function MobilePage() {
               marginTop: '16px',
               maxWidth: 'clamp(280px, 80vw, 340px)'
             }}>
-              A world-class creative ecosystem dedicated to Photography, Videography, and Content Production in the heart of Yenagoa, Nigeria.
+              A world-class creative ecosystem dedicated to Photography, Videography, and Content Production in the heart of Bayelsa State, Nigeria.
             </p>
             <div className="animate-on-scroll delay-3" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'clamp(16px, 4vw, 24px)' }}>
               <button style={{
@@ -333,7 +333,7 @@ export default function MobilePage() {
         {/* SECTION 3 — CREATIVE SPACES */}
         <section style={{ position: 'relative', width: '100vw', aspectRatio: '4/5', overflow: 'hidden' }}>
           <Image
-            src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=2070&auto=format&fit=crop"
+            src="/studio-2.jpg"
             alt="Creative Spaces"
             fill
             style={{ objectFit: 'cover' }}
@@ -462,7 +462,7 @@ export default function MobilePage() {
           <div className="animate-on-scroll delay-2" style={{ marginTop: 'clamp(24px, 6vw, 32px)' }}>
             <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
               <Image
-                src="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?q=80&w=2069&auto=format&fit=crop"
+                src="/studio-4.jpg"
                 alt="The Gallery"
                 fill
                 style={{ objectFit: 'cover', transition: 'transform 0.2s ease' }}
@@ -494,7 +494,7 @@ export default function MobilePage() {
           <div className="animate-on-scroll delay-3" style={{ marginTop: 'clamp(24px, 6vw, 32px)' }}>
             <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
               <Image
-                src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2078&auto=format&fit=crop"
+                src="/studio-5.jpg"
                 alt="Editorial Sets"
                 fill
                 style={{ objectFit: 'cover', transition: 'transform 0.2s ease' }}

@@ -81,7 +81,7 @@ export default function AboutPage() {
           {/* Background image overlay */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
             <Image
-              src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1600&auto=format&fit=crop"
+              src="/studio-3.jpg"
               alt="Solalina Studios atmosphere"
               fill
               priority
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 viewport={{ once: true, amount: 0.15 }}
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1000&auto=format&fit=crop"
+                  src="/studio-3.jpg"
                   alt="Solalina studio production desk"
                   fill
                   style={{ objectFit: 'cover', filter: 'brightness(85%) contrast(105%)' }}

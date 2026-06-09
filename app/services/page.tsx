@@ -17,7 +17,7 @@ const SEED_SERVICES = [
     description: 'Perfect for independent creators and brands seeking a professional environment. Multiple backdrops, modular lighting, and a dedicated team to support your vision.',
     priceLabel: 'Starting at ₦25,000/hr',
     features: ['Multiple Backdrops', 'Professional Lighting Included', 'Changing Room Access'],
-    image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=2070&auto=format&fit=crop',
+    image: '/studio-2.jpg',
     tag: 'Most Popular',
   },
   {
@@ -26,7 +26,7 @@ const SEED_SERVICES = [
     description: 'Professional audio & video recording. We handle the tech; you bring the talk. Broadcast-ready quality in a fully soundproofed suite.',
     priceLabel: 'Custom Packages Available',
     features: ['Multi-cam Setup', 'High-end Microphones', 'Live Monitoring', 'Soundproofed Room'],
-    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop',
+    image: '/studio-3.jpg',
     tag: 'Audio & Video',
   },
   {
@@ -35,7 +35,7 @@ const SEED_SERVICES = [
     description: 'High-energy Reels, TikToks, and Brand Videos tailored for your audience and social growth. Trend-focused directing and professional post-production.',
     priceLabel: 'Project-based Pricing',
     features: ['Trend-focused Directing', 'Professional Editing', 'Lighting Design'],
-    image: 'https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?q=80&w=2069&auto=format&fit=crop',
+    image: '/studio-4.jpg',
     tag: 'Social Media',
   },
 ]
@@ -54,7 +54,7 @@ export default function ServicesPage() {
           {/* Background image */}
           <div style={{ position: 'absolute', inset: 0 }}>
             <Image
-              src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2078&auto=format&fit=crop"
+              src="/studio-5.jpg"
               alt="Services hero"
               fill
               sizes="100vw"

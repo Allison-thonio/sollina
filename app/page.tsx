@@ -95,21 +95,21 @@ const STUDIO_PERKS = [
 
 const GALLERY_CARDS = [
   {
-    img: 'https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?q=80&w=2069&auto=format&fit=crop',
+    img: '/studio-4.jpg',
     title: 'THE GALLERY',
     desc: 'A curation of commercial masterpieces captured within our walls. From high-fashion editorials to sleek product shoots.',
     link: '/portfolio',
     cta: 'Explore Shoots',
   },
   {
-    img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2078&auto=format&fit=crop',
+    img: '/studio-5.jpg',
     title: 'EDITORIAL SETS',
     desc: 'Explore our modular set designs engineered for versatility. Custom lighting rigs and bespoke setups to match your vision.',
     link: '/services',
     cta: 'View Set Details',
   },
   {
-    img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop',
+    img: '/studio-3.jpg',
     title: 'PODCAST SESSIONS',
     desc: 'Crystal-clear audio and cinematic video. Our podcast suite transforms every recording into broadcast-quality content.',
     link: '/services',
@@ -152,7 +152,7 @@ export default function HomePage() {
           {/* Parallax image */}
           <div style={{ position: 'absolute', inset: 0, transform: `translateY(${heroOffset}px)`, top: '-20%', height: '120%' }}>
             <Image
-              src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=2070&auto=format&fit=crop"
+              src="/studio-1.jpg"
               alt="Solalina Studios"
               fill
               priority
@@ -322,7 +322,7 @@ export default function HomePage() {
               variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=2070&auto=format&fit=crop"
+                src="/studio-2.jpg"
                 alt="Creative Spaces"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
