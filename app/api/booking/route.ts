@@ -57,7 +57,8 @@ export async function POST(request: Request) {
     }
 
     // Validate form data
-    const { fullName, email, phone, service, preferredDate, sessionNotes } = body
+    const { fullName, email, phone, service, preferredDate, sessionNotes, ownerEmail } = body;
+    const trimmedOwnerEmail = ownerEmail?.trim();
 
     // Strip whitespace
     const trimmedFullName = fullName?.trim() || ''
@@ -124,9 +125,10 @@ export async function POST(request: Request) {
     })
 
     // Setup email data
+    const recipientEmail = trimmedOwnerEmail || 'allisonfezyy@gmail.com';
     const mailOptions = {
       from: process.env.EMAIL_USER || 'solalinastudiouse@gmail.com',
-      to: 'allisonfezyy@gmail.com',
+      to: recipientEmail,
       subject: `New Booking Request: ${trimmedService} for ${trimmedFullName}`,
       text: `
 You have received a new booking request from Sollina Studios website.
